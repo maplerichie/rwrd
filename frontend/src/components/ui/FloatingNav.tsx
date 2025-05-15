@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
-import { Wallet, QrCode, BarChart3, Package } from "lucide-react";
+import { Wallet, QrCode, BarChart3 } from "lucide-react";
 
 export type NavItem = {
   to: string;

@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { getSubscriptionPrograms, getSubscriptionProgramsByMerchantId } from '../services/subscriptionProgramService';
+import { getSubscriptionProgramsByMerchantId } from '../services/subscriptionProgramService';
 import type { SubscriptionProgram } from '../types/subscriptionProgram';
 
 export function useSubscriptionPrograms(merchant_id?: string) {

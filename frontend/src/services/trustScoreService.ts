@@ -1,4 +1,3 @@
-import { getMerchantByWallet } from './merchantService';
 import supabase from '../utils/supabase';
 import type { Merchant } from '../types/merchant';
 import type { Borrowing } from '../types/borrowing';

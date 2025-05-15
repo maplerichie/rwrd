@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { getProducts, getProductsByMerchantId } from '../services/productService';
+import { getProductsByMerchantId } from '../services/productService';
 import type { Product } from '../types/product';
 
 export function useProducts(merchant_id?: string) {

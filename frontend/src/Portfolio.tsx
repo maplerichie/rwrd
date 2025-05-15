@@ -1,15 +1,6 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { BarChart3 } from 'lucide-react';
 
-const subscriptions = [
-  { name: 'Coffee Club', quota: '8/12', next: 'Tomorrow' },
-  { name: 'Bulk Groceries', quota: '2/5', next: '3 days' },
-];
-const history = [
-  { program: 'Coffee Club', date: '2024-06-01', amount: '1 cup' },
-  { program: 'Bulk Groceries', date: '2024-05-29', amount: '1 box' },
-];
-
 export default function Portfolio() {
   return (
     <div className="min-h-screen bg-[#19161c] flex flex-col items-center px-4 py-8 pb-16">

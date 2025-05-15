@@ -1,5 +1,4 @@
 import supabase from '../utils/supabase';
-import type { Subscription } from '../types/subscription';
 
 export async function getSubscriptionsByCustomerIdWithDetails(customerId: string) {
   // Try to join subscription_programs and merchants if FK exists

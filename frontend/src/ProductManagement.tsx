@@ -1,9 +1,8 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { getMerchantByWallet } from "./services/merchantService";
-import { Package, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { useProducts } from './hooks/useProducts';
 import { useCreateProduct } from './hooks/useCreateProduct';
 import { useUpdateProduct } from './hooks/useUpdateProduct';
@@ -48,11 +47,11 @@ export default function ProductManagement() {
   const { products, loading, error, refetch } = useProducts(merchant_id);
   const { createProduct, loading: creating } = useCreateProduct();
   const { updateProduct, loading: updating } = useUpdateProduct();
-  const { deleteProduct, loading: deleting } = useDeleteProduct();
+  const { deleteProduct } = useDeleteProduct();
   const { subscriptionPrograms, loading: loadingPrograms, error: errorPrograms, refetch: refetchPrograms } = useSubscriptionPrograms(merchant_id);
   const { createSubscriptionProgram, loading: creatingProgram } = useCreateSubscriptionProgram();
   const { updateSubscriptionProgram, loading: updatingProgram } = useUpdateSubscriptionProgram();
-  const { deleteSubscriptionProgram, loading: deletingProgram } = useDeleteSubscriptionProgram();
+  const { deleteSubscriptionProgram } = useDeleteSubscriptionProgram();
 
   const [showForm, setShowForm] = useState(false);
   const [editProduct, setEditProduct] = useState<Product | null>(null);
@@ -123,7 +122,7 @@ export default function ProductManagement() {
   async function handleCreateProgram(values: { name: string; price: number; description?: string; quota: number; product_ids: string[]; active: boolean }) {
     try {
       if (!merchant_id) throw new Error('Merchant not loaded');
-      const result = await createSubscriptionProgram({ ...values, merchant_id });
+      const result = await createSubscriptionProgram({ ...values, merchant_id, max_duration: 365 });
       if (!result) {
         toast.error('Failed to create subscription program: No program returned.');
         return;

@@ -1,5 +1,4 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { useState, useEffect } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { getMerchantByWallet } from "./services/merchantService";
@@ -15,7 +14,7 @@ import type { Merchant } from "./types/merchant";
 import type { Borrowing } from "./types/borrowing";
 
 export default function MerchantBorrow() {
-  const { publicKey, connected } = useWallet();
+  const { publicKey } = useWallet();
   const walletAddress = publicKey?.toBase58() || null;
   const [merchant, setMerchant] = useState<Merchant | null>(null);
   const [history, setHistory] = useState<Borrowing[]>([]);
@@ -54,7 +53,7 @@ export default function MerchantBorrow() {
         }
       })
       .then((h) => setHistory(h))
-      .catch((err) => {
+      .catch(() => {
         setError("Failed to fetch merchant or borrow history");
         setMerchant(null);
         setHistory([]);

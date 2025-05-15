@@ -1,6 +1,6 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { getMerchantByWallet } from "./services/merchantService";
-import { getBorrowHistoryByMerchantId, getDebt, getAPR } from "./services/trustScoreService";
+import { getBorrowHistoryByMerchantId } from "./services/trustScoreService";
 import { TrendingUp, TrendingDown, DollarSign } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
@@ -23,7 +23,7 @@ const TABS = ["Sales", "Subscriptions", "Lending"];
 export default function MerchantPortfolio() {
   const { publicKey } = useWallet();
   const walletAddress = publicKey?.toBase58() || null;
-  const [merchant, setMerchant] = useState<Merchant | null>(null);
+  const [_merchant, setMerchant] = useState<Merchant | null>(null);
   const [history, setHistory] = useState<Borrowing[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
