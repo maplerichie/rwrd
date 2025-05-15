@@ -1,0 +1,104 @@
+// RWRD Data Model Types
+// Relationships:
+// Merchant 1—* Product
+// Merchant 1—* SubscriptionProgram
+// SubscriptionProgram 1—* Product
+// Subscription 1—* Redemption
+// Customer — SubscriptionProgram (via Subscription)
+// Customer — Transaction
+// Merchant 1—* Borrowing
+
+export interface Merchant {
+  id: string;
+  name: string;
+  email: string;
+  wallet_address: string;
+  trust_score: number;
+  created_at: string;
+}
+
+export interface Product {
+  id: string;
+  merchant_id: string; // FK to Merchant
+  name: string;
+  image_url: string;
+  price: number;
+  description?: string;
+  active: boolean;
+  created_at: string;
+}
+
+export interface SubscriptionProgram {
+  id: string;
+  merchant_id: string; // FK to Merchant
+  name: string;
+  price: number;
+  description?: string;
+  quota: number; // e.g., 12 coffees
+  product_ids: string[]; // Products included in this program
+  active: boolean;
+  created_at: string;
+}
+
+export interface Customer {
+  id: string;
+  name: string;
+  email: string;
+  wallet_address: string;
+  created_at: string;
+}
+
+export interface Subscription {
+  id: string;
+  customer_id: string; // FK to Customer
+  program_id: string; // FK to SubscriptionProgram
+  start_date: string;
+  last_redeemed_at?: string;
+  remaining_quota: number;
+  status: 'active' | 'redeemed';
+}
+
+export interface Redemption {
+  id: string;
+  subscription_id: string; // FK to Subscription
+  customer_id: string;
+  merchant_id: string;
+  product_id: string;
+  redeemed_at: string;
+  amount: number;
+  transaction_id: string;
+  yield_used: number;
+  principal_used: number;
+}
+
+export interface Purchase {
+  id: string;
+  customer_id: string;
+  merchant_id: string;
+  product_id: string;
+  subscription_id?: string;
+  amount: number;
+  transaction_id: string;
+  yield_used: number;
+  principal_used: number;
+  type: 'item' | 'subscription';
+  created_at: string;
+}
+
+/*
+  Borrowing:
+  - Merchant borrows money from subscription sales pool
+  - Merchant pays interest to subscription sales pool
+  - Merchant repays money to subscription sales pool
+  - Customer earns yield from the money borrowed
+*/
+export interface Borrowing {
+  id: string;
+  merchant_id: string;
+  amount: number;
+  transaction_id: string;
+  current_revenue: number;
+  current_trust_score: number;
+  type: 'borrow' | 'repay'
+  created_at: string;
+} 

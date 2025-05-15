@@ -1,0 +1,24 @@
+[package]
+name = "subscription-manager"
+version = "0.1.0"
+description = "Created with Anchor"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "subscription_manager"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+default = []
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+
+[dependencies]
+anchor-lang = "0.31.1"
+anchor-spl = "0.31.1"
+subscription-factory = { path = "../subscription-factory", features = ["cpi"] }
+liquidity-pool = { path = "../liquidity-pool", features = ["cpi"] }
+
