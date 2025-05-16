@@ -1,0 +1,466 @@
+{
+  "address": "9MCcaFZBat4AcRvQmt5GxunDrBYN7yGgnBWGRPVETvrE",
+  "metadata": {
+    "name": "merchant_registry",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "registry_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121,
+                  45,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "governance"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "fee",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "register_merchant",
+      "discriminator": [
+        238,
+        245,
+        77,
+        132,
+        161,
+        88,
+        216,
+        248
+      ],
+      "accounts": [
+        {
+          "name": "merchant_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  101,
+                  114,
+                  99,
+                  104,
+                  97,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "merchant_wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "merchant_wallet"
+        },
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "merchant_info",
+          "type": {
+            "defined": {
+              "name": "MerchantInfo"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "register_program",
+      "discriminator": [
+        104,
+        9,
+        166,
+        5,
+        200,
+        228,
+        112,
+        131
+      ],
+      "accounts": [
+        {
+          "name": "merchant_account",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  101,
+                  114,
+                  99,
+                  104,
+                  97,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "merchant_account.merchant_wallet",
+                "account": "MerchantAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "program_authority",
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "_program_id",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "update_merchant_info",
+      "discriminator": [
+        254,
+        42,
+        5,
+        10,
+        82,
+        188,
+        116,
+        32
+      ],
+      "accounts": [
+        {
+          "name": "merchant_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  101,
+                  114,
+                  99,
+                  104,
+                  97,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "merchant_wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "merchant_wallet",
+          "signer": true,
+          "relations": [
+            "merchant_account"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "merchant_info",
+          "type": {
+            "defined": {
+              "name": "MerchantInfo"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "verify_merchant",
+      "discriminator": [
+        64,
+        211,
+        33,
+        148,
+        73,
+        229,
+        155,
+        133
+      ],
+      "accounts": [
+        {
+          "name": "registry_state",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121,
+                  45,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "merchant_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  101,
+                  114,
+                  99,
+                  104,
+                  97,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "merchant_account.merchant_wallet",
+                "account": "MerchantAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "registry_state"
+          ]
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "MerchantAccount",
+      "discriminator": [
+        182,
+        10,
+        106,
+        140,
+        73,
+        79,
+        234,
+        186
+      ]
+    },
+    {
+      "name": "RegistryState",
+      "discriminator": [
+        29,
+        34,
+        224,
+        195,
+        175,
+        183,
+        99,
+        97
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "MerchantNotVerified",
+      "msg": "Merchant is not verified"
+    },
+    {
+      "code": 6001,
+      "name": "Unauthorized",
+      "msg": "Unauthorized. Only authority can perform this action"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidMerchantInfo",
+      "msg": "Invalid merchant info"
+    }
+  ],
+  "types": [
+    {
+      "name": "MerchantAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "merchant_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "info",
+            "type": {
+              "defined": {
+                "name": "MerchantInfo"
+              }
+            }
+          },
+          {
+            "name": "verified",
+            "type": "bool"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "updated_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MerchantInfo",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "category",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "location",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "website",
+            "type": {
+              "array": [
+                "u8",
+                64
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "RegistryState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "governance",
+            "type": "pubkey"
+          },
+          {
+            "name": "fee",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ]
+}

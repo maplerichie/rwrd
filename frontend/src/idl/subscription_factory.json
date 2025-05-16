@@ -1,0 +1,445 @@
+{
+  "address": "AmZj2VQDPnsNaUBHQXAiifMhaKWDLgQ1GmgXDGTjY5Lw",
+  "metadata": {
+    "name": "subscription_factory",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "close_subscription_program",
+      "discriminator": [
+        2,
+        3,
+        191,
+        127,
+        177,
+        25,
+        39,
+        28
+      ],
+      "accounts": [
+        {
+          "name": "subscription_program",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  117,
+                  98,
+                  115,
+                  99,
+                  114,
+                  105,
+                  112,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  112,
+                  114,
+                  111,
+                  103,
+                  114,
+                  97,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "merchant_wallet"
+              },
+              {
+                "kind": "account",
+                "path": "subscription_program.program_name",
+                "account": "SubscriptionProgram"
+              }
+            ]
+          }
+        },
+        {
+          "name": "merchant_wallet",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "create_subscription_program",
+      "discriminator": [
+        122,
+        83,
+        92,
+        12,
+        121,
+        24,
+        55,
+        225
+      ],
+      "accounts": [
+        {
+          "name": "subscription_program",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  117,
+                  98,
+                  115,
+                  99,
+                  114,
+                  105,
+                  112,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  112,
+                  114,
+                  111,
+                  103,
+                  114,
+                  97,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "merchant_wallet"
+              },
+              {
+                "kind": "arg",
+                "path": "program_name"
+              }
+            ]
+          }
+        },
+        {
+          "name": "merchant_wallet",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "factory_state",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  99,
+                  116,
+                  111,
+                  114,
+                  121,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "merchant_account",
+          "writable": true
+        },
+        {
+          "name": "merchant_registry_program",
+          "address": "9MCcaFZBat4AcRvQmt5GxunDrBYN7yGgnBWGRPVETvrE"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "program_name",
+          "type": "string"
+        },
+        {
+          "name": "subscription_price",
+          "type": "u64"
+        },
+        {
+          "name": "duration_days",
+          "type": "u16"
+        },
+        {
+          "name": "redemption_quota",
+          "type": "u16"
+        }
+      ]
+    },
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "factory_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  99,
+                  116,
+                  111,
+                  114,
+                  121,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "authority",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "update_subscription_program",
+      "discriminator": [
+        93,
+        102,
+        219,
+        243,
+        21,
+        152,
+        143,
+        247
+      ],
+      "accounts": [
+        {
+          "name": "subscription_program",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  117,
+                  98,
+                  115,
+                  99,
+                  114,
+                  105,
+                  112,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  112,
+                  114,
+                  111,
+                  103,
+                  114,
+                  97,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "merchant_wallet"
+              },
+              {
+                "kind": "account",
+                "path": "subscription_program.program_name",
+                "account": "SubscriptionProgram"
+              }
+            ]
+          }
+        },
+        {
+          "name": "merchant_wallet",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "subscription_price",
+          "type": {
+            "option": "u64"
+          }
+        },
+        {
+          "name": "duration_days",
+          "type": {
+            "option": "u16"
+          }
+        },
+        {
+          "name": "redemption_quota",
+          "type": {
+            "option": "u16"
+          }
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "FactoryState",
+      "discriminator": [
+        91,
+        157,
+        184,
+        99,
+        123,
+        112,
+        102,
+        7
+      ]
+    },
+    {
+      "name": "SubscriptionProgram",
+      "discriminator": [
+        106,
+        59,
+        223,
+        69,
+        176,
+        82,
+        210,
+        140
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "UnauthorizedAccess",
+      "msg": "Unauthorized access"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidPrice",
+      "msg": "Invalid subscription price"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidDuration",
+      "msg": "Invalid duration period"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidQuota",
+      "msg": "Invalid redemption quota"
+    },
+    {
+      "code": 6004,
+      "name": "InvalidProgramName",
+      "msg": "Invalid program name"
+    }
+  ],
+  "types": [
+    {
+      "name": "FactoryState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SubscriptionProgram",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "merchant",
+            "type": "pubkey"
+          },
+          {
+            "name": "program_name",
+            "type": "string"
+          },
+          {
+            "name": "subscription_price",
+            "type": "u64"
+          },
+          {
+            "name": "duration_days",
+            "type": "u16"
+          },
+          {
+            "name": "redemption_quota",
+            "type": "u16"
+          },
+          {
+            "name": "is_active",
+            "type": "bool"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "updated_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ]
+}

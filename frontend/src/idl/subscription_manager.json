@@ -1,0 +1,839 @@
+{
+  "address": "ES4jrcNmiwq87RFZ8dXhbXdc6aYSrwQDoJ8CyGsyjNF8",
+  "metadata": {
+    "name": "subscription_manager",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "manager_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  97,
+                  110,
+                  97,
+                  103,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "authority",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "redeem",
+      "discriminator": [
+        184,
+        12,
+        86,
+        149,
+        70,
+        196,
+        97,
+        225
+      ],
+      "accounts": [
+        {
+          "name": "subscription",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  117,
+                  98,
+                  115,
+                  99,
+                  114,
+                  105,
+                  112,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "subscription.user",
+                "account": "SubscriptionAccount"
+              },
+              {
+                "kind": "account",
+                "path": "subscription.program_id",
+                "account": "SubscriptionAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "signer",
+          "signer": true
+        },
+        {
+          "name": "merchant_wallet"
+        },
+        {
+          "name": "subscription_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "redemption_amount",
+          "type": "u16"
+        },
+        {
+          "name": "merchant_signature",
+          "type": {
+            "array": [
+              "u8",
+              64
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "renew_subscription",
+      "discriminator": [
+        45,
+        75,
+        154,
+        194,
+        160,
+        10,
+        111,
+        183
+      ],
+      "accounts": [
+        {
+          "name": "subscription",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  117,
+                  98,
+                  115,
+                  99,
+                  114,
+                  105,
+                  112,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              },
+              {
+                "kind": "account",
+                "path": "subscription_program"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "subscription_program"
+        },
+        {
+          "name": "merchant_wallet"
+        },
+        {
+          "name": "pool_state",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "liquidity_pool_program"
+            }
+          }
+        },
+        {
+          "name": "user_deposit",
+          "writable": true,
+          "optional": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  100,
+                  101,
+                  112,
+                  111,
+                  115,
+                  105,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              },
+              {
+                "kind": "account",
+                "path": "payment_token_mint"
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "liquidity_pool_program"
+            }
+          }
+        },
+        {
+          "name": "pool_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "payment_token_mint"
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "liquidity_pool_program"
+            }
+          }
+        },
+        {
+          "name": "user_token_account",
+          "writable": true
+        },
+        {
+          "name": "merchant_token_account",
+          "writable": true
+        },
+        {
+          "name": "payment_token_mint"
+        },
+        {
+          "name": "liquidity_pool_program",
+          "address": "CJpW4FJkG86qj6p41S2NFBzWYCcYESNaCRDwGew21DyA"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "payment_amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "subscribe",
+      "discriminator": [
+        254,
+        28,
+        191,
+        138,
+        156,
+        179,
+        183,
+        53
+      ],
+      "accounts": [
+        {
+          "name": "subscription",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  117,
+                  98,
+                  115,
+                  99,
+                  114,
+                  105,
+                  112,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              },
+              {
+                "kind": "account",
+                "path": "subscription_program"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "manager_state",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  97,
+                  110,
+                  97,
+                  103,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "subscription_program"
+        },
+        {
+          "name": "subscription_factory_program"
+        },
+        {
+          "name": "user_token_account",
+          "writable": true
+        },
+        {
+          "name": "pool_vault",
+          "writable": true
+        },
+        {
+          "name": "payment_token_mint"
+        },
+        {
+          "name": "nft_mint"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "payment_amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "ManagerState",
+      "discriminator": [
+        222,
+        42,
+        42,
+        254,
+        109,
+        39,
+        91,
+        188
+      ]
+    },
+    {
+      "name": "PoolState",
+      "discriminator": [
+        247,
+        237,
+        227,
+        245,
+        215,
+        195,
+        222,
+        70
+      ]
+    },
+    {
+      "name": "SubscriptionAccount",
+      "discriminator": [
+        247,
+        1,
+        6,
+        72,
+        172,
+        66,
+        24,
+        128
+      ]
+    },
+    {
+      "name": "SubscriptionProgram",
+      "discriminator": [
+        106,
+        59,
+        223,
+        69,
+        176,
+        82,
+        210,
+        140
+      ]
+    },
+    {
+      "name": "UserDepositAccount",
+      "discriminator": [
+        99,
+        216,
+        113,
+        153,
+        183,
+        117,
+        137,
+        20
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "RedemptionEvent",
+      "discriminator": [
+        72,
+        165,
+        70,
+        6,
+        179,
+        67,
+        82,
+        183
+      ]
+    },
+    {
+      "name": "SubscriptionCreatedEvent",
+      "discriminator": [
+        247,
+        246,
+        115,
+        176,
+        253,
+        84,
+        244,
+        155
+      ]
+    },
+    {
+      "name": "SubscriptionRenewedEvent",
+      "discriminator": [
+        77,
+        2,
+        48,
+        127,
+        173,
+        252,
+        49,
+        6
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InactiveProgram",
+      "msg": "Subscription program is inactive"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidPaymentAmount",
+      "msg": "Payment amount does not match subscription price"
+    },
+    {
+      "code": 6002,
+      "name": "ExpiredSubscription",
+      "msg": "Subscription has expired"
+    },
+    {
+      "code": 6003,
+      "name": "InsufficientQuota",
+      "msg": "Insufficient remaining quota for redemption"
+    },
+    {
+      "code": 6004,
+      "name": "UnauthorizedMerchant",
+      "msg": "Unauthorized merchant for this subscription"
+    },
+    {
+      "code": 6005,
+      "name": "UnauthorizedAccess",
+      "msg": "Unauthorized access"
+    }
+  ],
+  "types": [
+    {
+      "name": "ManagerState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PoolState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "total_deposited",
+            "type": "u64"
+          },
+          {
+            "name": "total_borrowed",
+            "type": "u64"
+          },
+          {
+            "name": "base_rate",
+            "type": "u64"
+          },
+          {
+            "name": "utilization_slope",
+            "type": "u64"
+          },
+          {
+            "name": "protocol_fee_percent",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RedemptionEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "subscription_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "program_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "redemption_amount",
+            "type": "u16"
+          },
+          {
+            "name": "remaining_quota",
+            "type": "u16"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SubscriptionAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "program_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "token_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "remaining_quota",
+            "type": "u16"
+          },
+          {
+            "name": "expiry_timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "last_redeemed_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SubscriptionCreatedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "subscription_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "program_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "token_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "expiry_timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SubscriptionProgram",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "merchant",
+            "type": "pubkey"
+          },
+          {
+            "name": "program_name",
+            "type": "string"
+          },
+          {
+            "name": "subscription_price",
+            "type": "u64"
+          },
+          {
+            "name": "duration_days",
+            "type": "u16"
+          },
+          {
+            "name": "redemption_quota",
+            "type": "u16"
+          },
+          {
+            "name": "is_active",
+            "type": "bool"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "updated_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SubscriptionRenewedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "subscription_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "program_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "new_expiry_timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UserDepositAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "token_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "deposited_amount",
+            "type": "u64"
+          },
+          {
+            "name": "interest_earned",
+            "type": "u64"
+          },
+          {
+            "name": "last_interest_calculation",
+            "type": "i64"
+          },
+          {
+            "name": "deposit_date",
+            "type": "i64"
+          }
+        ]
+      }
+    }
+  ]
+}
